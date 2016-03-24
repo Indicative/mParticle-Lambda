@@ -1,0 +1,86 @@
+# NetBeans specific #
+nbproject/private/
+*/nbproject/private/
+*nbproject/genfiles.properties
+*/nbproject/genfiles.properties
+*build/
+*dist/
+*target/
+*/nb-configuration.xml
+*nbactions.xml
+
+# Documentation #
+Documentation/_build
+
+# Tmp files #
+*.*~
+*~
+*/*/*~
+gc.log
+*.log
+Pythia-Data/wal/*
+log
+logs
+
+# Class Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Compile Python Files
+*.pyc
+
+# OS generated files #
+.DS_Store?
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+
+# NetBeans Files via Gil #
+##################
+/nbproject/private/
+/**/nbproject/private/
+/**/**/nbproject/private/
+/**/**/**/nbproject/private/
+/**/**/**/**/nbproject/private/
+/**/**/**/**/**/nbproject/private/
+/**/**/**/**/**/**/nbproject/private/
+/**/**/**/**/**/**/**/nbproject/private/
+/**/**/**/**/**/**/**/**/nbproject/private/
+/**/**/**/**/**/**/**/**/**/nbproject/private/
+/**/**/**/**/**/**/**/**/**/**/nbproject/private/
+/**/**/**/**/**/**/**/**/**/**/**/nbproject/private/
+/build/
+/**/build/
+/**/**/build/
+/**/**/**/build/
+/**/**/**/**/build/
+/**/**/**/**/**/build/
+/**/**/**/**/**/**/build/
+/**/**/**/**/**/**/**/build/
+/**/**/**/**/**/**/**/**/build/
+/**/**/**/**/**/**/**/**/**/build/
+/**/**/**/**/**/**/**/**/**/**/build/
+/**/**/**/**/**/**/**/**/**/**/**/build/
+/dist/
+/**/dist/
+/**/**/dist/
+/**/**/**/dist/
+/**/**/**/**/dist/
+/**/**/**/**/**/dist/
+/**/**/**/**/**/**/dist/
+/**/**/**/**/**/**/**/dist/
+/**/**/**/**/**/**/**/**/dist/
+/**/**/**/**/**/**/**/**/**/dist/
+/**/**/**/**/**/**/**/**/**/**/dist/
+/**/**/**/**/**/**/**/**/**/**/**/dist/
+
+#IntelliJ Idea
+.idea
+*.iml
+.java-version
