@@ -13,10 +13,10 @@ import java.io.OutputStream;
  * Created by prajjwol on 3/23/16.
  */
 public class MparticleLambdaEndpoint implements RequestStreamHandler {
+    private final MessageSerializer serializer = new MessageSerializer();
 
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
         MparticleMessageProcessor processor = new MparticleMessageProcessor();
-        MessageSerializer serializer = new MessageSerializer();
         Message request = serializer.deserialize(inputStream, Message.class);
         Message response = processor.processMessage(request);
         serializer.serialize(outputStream, response);
