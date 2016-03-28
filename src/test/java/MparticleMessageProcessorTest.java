@@ -55,12 +55,12 @@ public class MparticleMessageProcessorTest {
 
 //    @Test
 //    public void testProcess() throws IOException{
-//        MparticleLambdaEndpoint endpoint = mock(MparticleLambdaEndpoint.class);
+//        MparticleLambdaEndpoint endpoint = new MparticleLambdaEndpoint();
 //        InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(EVENT_PROCESSING));
 //        OutputStream outputStream = new ByteOutputStream();
 //        Context context = new TestContext();
 //        endpoint.handleRequest(inputStream, outputStream, context);
-//        verify(mparticleMessageProcessor, times(1)).processMessage(any(Message.class));
+//        verify(mparticleMessageProcessor, times(1)).processEventProcessingRequest(any(EventProcessingRequest.class));
 //    }
 
     @Test
