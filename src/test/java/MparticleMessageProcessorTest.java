@@ -5,6 +5,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.indicative.partners.mparticle.MparticleLambdaEndpoint;
 import com.indicative.partners.mparticle.MparticleMessageProcessor;
+import com.mparticle.sdk.MessageProcessor;
 import com.mparticle.sdk.model.Message;
 import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeRequest;
 import com.mparticle.sdk.model.audienceprocessing.AudienceSubscriptionRequest;
@@ -35,19 +36,15 @@ public class MparticleMessageProcessorTest {
     private final static String EVENT_PROCESSING = "EventProcessing";
     private final static String AUDIENCE_SUBSCRIPTION = "AudienceSubscription";
     private Injector injector;
-
-    private MparticleLambdaEndpoint lambdaEndpoint;
     private MparticleMessageProcessor mparticleMessageProcessor;
 
     @Before
     public void setUp() throws Exception{
-        lambdaEndpoint = Mockito.mock(MparticleLambdaEndpoint.class);
         mparticleMessageProcessor = Mockito.mock(MparticleMessageProcessor.class);
         injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
                 bind(MparticleMessageProcessor.class).toInstance(mparticleMessageProcessor);
-                bind(MparticleLambdaEndpoint.class).toInstance(lambdaEndpoint);
                 }
         });
     }
@@ -58,10 +55,11 @@ public class MparticleMessageProcessorTest {
 
 //    @Test
 //    public void testProcess() throws IOException{
+//        MparticleLambdaEndpoint endpoint = mock(MparticleLambdaEndpoint.class);
 //        InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(EVENT_PROCESSING));
 //        OutputStream outputStream = new ByteOutputStream();
-//        Context context = Mockito.mock(Context.class);
-//        lambdaEndpoint.handleRequest(inputStream, outputStream, context);
+//        Context context = new TestContext();
+//        endpoint.handleRequest(inputStream, outputStream, context);
 //        verify(mparticleMessageProcessor, times(1)).processMessage(any(Message.class));
 //    }
 

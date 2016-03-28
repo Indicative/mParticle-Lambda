@@ -2,6 +2,7 @@ package com.indicative.partners.mparticle;
 
 import com.google.common.collect.Lists;
 import com.mparticle.sdk.MessageProcessor;
+import com.mparticle.sdk.model.Message;
 import com.mparticle.sdk.model.MessageSerializer;
 import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeRequest;
 import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeResponse;
@@ -36,6 +37,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
     private static final String INDICATIVE_INPUT_URL = "https://api.indicative.com/service/mparticle/";
 
     private final MessageSerializer serializer = new MessageSerializer();
+
 
     @Override
     public ModuleRegistrationResponse processRegistrationRequest(ModuleRegistrationRequest moduleRegistrationRequest) {
