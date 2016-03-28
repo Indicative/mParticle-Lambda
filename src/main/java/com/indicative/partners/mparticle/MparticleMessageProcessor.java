@@ -11,13 +11,13 @@ import com.mparticle.sdk.model.eventprocessing.Event;
 import com.mparticle.sdk.model.eventprocessing.EventProcessingRequest;
 import com.mparticle.sdk.model.eventprocessing.EventProcessingResponse;
 import com.mparticle.sdk.model.registration.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,9 +25,8 @@ import java.util.List;
 /**
  * Created by prajjwol on 3/23/16.
  */
+@Slf4j
 public class MparticleMessageProcessor extends MessageProcessor {
-    private final Logger log = Logger.getLogger("MparticleMessageProcessor");
-
     private static final String NAME = "Indicative";
     private static final String VERSION = "1.0";
     private static final String DESCRIPTION = "<a href=\"https://www.indicative.com\" target=\"_blank\">" +
@@ -96,7 +95,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
 
         if(response == null || response.getStatusLine().getStatusCode() != 200){
             if(response != null){
-                log.debug("Status code of the request is " + response.getStatusLine().getStatusCode());
+                log.debug("Status code of the request is {}", response.getStatusLine().getStatusCode());
             }
         }
     }
