@@ -5,12 +5,11 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.indicative.partners.mparticle.MparticleLambdaEndpoint;
 import com.indicative.partners.mparticle.MparticleMessageProcessor;
-import com.mparticle.sdk.MessageProcessor;
-import com.mparticle.sdk.model.Message;
 import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeRequest;
 import com.mparticle.sdk.model.audienceprocessing.AudienceSubscriptionRequest;
 import com.mparticle.sdk.model.audienceprocessing.UserProfile;
 import com.mparticle.sdk.model.eventprocessing.EventProcessingRequest;
+import com.mparticle.sdk.model.registration.ModuleRegistrationRequest;
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import com.yammer.dropwizard.testing.JsonHelpers;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +36,7 @@ public class MparticleMessageProcessorTest {
     private final static String AUDIENCE_SUBSCRIPTION = "AudienceSubscription";
     private Injector injector;
     private MparticleMessageProcessor mparticleMessageProcessor;
+    private MparticleLambdaEndpoint endpoint;
 
     @Before
     public void setUp() throws Exception{
@@ -47,21 +47,46 @@ public class MparticleMessageProcessorTest {
                 bind(MparticleMessageProcessor.class).toInstance(mparticleMessageProcessor);
                 }
         });
+        endpoint = new MparticleLambdaEndpoint(mparticleMessageProcessor);
     }
 
     private String loadMparticleFixture(String name) throws IOException {
         return JsonHelpers.jsonFixture("fixtures/" + name + "Request.json");
     }
 
-//    @Test
-//    public void testProcess() throws IOException{
-//        MparticleLambdaEndpoint endpoint = new MparticleLambdaEndpoint();
-//        InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(EVENT_PROCESSING));
-//        OutputStream outputStream = new ByteOutputStream();
-//        Context context = new TestContext();
-//        endpoint.handleRequest(inputStream, outputStream, context);
-//        verify(mparticleMessageProcessor, times(1)).processEventProcessingRequest(any(EventProcessingRequest.class));
-//    }
+    @Test
+    public void testProcessEventProcessing() throws IOException{
+        InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(EVENT_PROCESSING));
+        OutputStream outputStream = new ByteOutputStream();
+        Context context = new TestContext();
+        endpoint.handleRequest(inputStream, outputStream, context);
+        verify(mparticleMessageProcessor, times(1)).processEventProcessingRequest(any(EventProcessingRequest.class));
+    }
+
+    @Test
+    public void testProcessAudienceSubscription() throws IOException{
+        InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(AUDIENCE_SUBSCRIPTION));
+        OutputStream outputStream = new ByteOutputStream();
+        Context context = new TestContext();
+        endpoint.handleRequest(inputStream, outputStream, context);
+        verify(mparticleMessageProcessor, times(1)).processAudienceSubscriptionRequest(any(AudienceSubscriptionRequest.class));
+    }
+    @Test
+    public void testProcessAudienceMembershipChange() throws IOException{
+        InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(AUDIENCE_MEMBERSHIP));
+        OutputStream outputStream = new ByteOutputStream();
+        Context context = new TestContext();
+        endpoint.handleRequest(inputStream, outputStream, context);
+        verify(mparticleMessageProcessor, times(1)).processAudienceMembershipChangeRequest(any(AudienceMembershipChangeRequest.class));
+    }
+    @Test
+    public void testProcessModuleRegistration() throws IOException{
+        InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(MODULE_REGISTRATION));
+        OutputStream outputStream = new ByteOutputStream();
+        Context context = new TestContext();
+        endpoint.handleRequest(inputStream, outputStream, context);
+        verify(mparticleMessageProcessor, times(1)).processRegistrationRequest(any(ModuleRegistrationRequest.class));
+    }
 
     @Test
     public void testProcessEventProcessingRequest() throws Exception{

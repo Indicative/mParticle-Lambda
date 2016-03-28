@@ -18,17 +18,15 @@ import java.io.OutputStream;
 public class MparticleLambdaEndpoint implements RequestStreamHandler {
     private final MessageSerializer serializer = new MessageSerializer();
 
-//    private MparticleMessageProcessor processor;
-//
-//    @Inject
-//    public MparticleLambdaEndpoint(MparticleMessageProcessor processor){
-//        this.processor = processor;
-//    }
+    private MparticleMessageProcessor processor;
+
+    @Inject
+    public MparticleLambdaEndpoint(MparticleMessageProcessor processor){
+        this.processor = processor;
+    }
 
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
-        MparticleMessageProcessor processor = new MparticleMessageProcessor();
         Message request = serializer.deserialize(inputStream, Message.class);
-        context.getLogger().log("this is request " + request.getType());
         Message response = processor.processMessage(request);
         serializer.serialize(outputStream, response);
     }
