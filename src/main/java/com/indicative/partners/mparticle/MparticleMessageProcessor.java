@@ -49,8 +49,8 @@ public class MparticleMessageProcessor extends MessageProcessor {
         Permissions permissions = new Permissions();
         permissions.setUserIdentities(
                 Arrays.asList(
-                        new UserIdentityPermission(UserIdentity.Type.EMAIL, Identity.Encoding.RAW, true),
-                        new UserIdentityPermission(UserIdentity.Type.CUSTOMER, Identity.Encoding.RAW)
+                        new UserIdentityPermission(UserIdentity.Type.EMAIL, Identity.Encoding.RAW),
+                        new UserIdentityPermission(UserIdentity.Type.CUSTOMER, Identity.Encoding.RAW, true)
                 )
         );
         permissions.setAllowAccessIpAddress(true);
