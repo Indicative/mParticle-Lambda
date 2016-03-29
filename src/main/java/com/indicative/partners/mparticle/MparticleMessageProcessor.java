@@ -96,7 +96,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
 
     private void postMessage(Account account, String messageText) throws IOException {
         HttpClient client = HttpClientBuilder.create().build();
-        HttpPost request = new HttpPost(INDICATIVE_INPUT_URL + account.getAccountId());
+        HttpPost request = new HttpPost(INDICATIVE_INPUT_URL + account.getStringSetting(SETTINGS_API_KEY, true, null));
         request.setEntity(new StringEntity(messageText, ContentType.APPLICATION_JSON));
         HttpResponse response = client.execute(request);
 
