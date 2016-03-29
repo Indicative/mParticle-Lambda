@@ -8,9 +8,7 @@ import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeReques
 import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeResponse;
 import com.mparticle.sdk.model.audienceprocessing.AudienceSubscriptionRequest;
 import com.mparticle.sdk.model.audienceprocessing.AudienceSubscriptionResponse;
-import com.mparticle.sdk.model.eventprocessing.Event;
-import com.mparticle.sdk.model.eventprocessing.EventProcessingRequest;
-import com.mparticle.sdk.model.eventprocessing.EventProcessingResponse;
+import com.mparticle.sdk.model.eventprocessing.*;
 import com.mparticle.sdk.model.registration.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
@@ -21,6 +19,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,6 +47,12 @@ public class MparticleMessageProcessor extends MessageProcessor {
                 .setIsConfidential(true);
 
         Permissions permissions = new Permissions();
+        permissions.setUserIdentities(
+                Arrays.asList(
+                        new UserIdentityPermission(UserIdentity.Type.EMAIL, Identity.Encoding.RAW, true),
+                        new UserIdentityPermission(UserIdentity.Type.CUSTOMER, Identity.Encoding.RAW)
+                )
+        );
         permissions.setAllowAccessIpAddress(true);
         permissions.setAllowAccessIpAddress(true);
 
