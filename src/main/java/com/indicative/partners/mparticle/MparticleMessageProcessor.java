@@ -11,12 +11,13 @@ import com.mparticle.sdk.model.audienceprocessing.AudienceSubscriptionResponse;
 import com.mparticle.sdk.model.eventprocessing.*;
 import com.mparticle.sdk.model.registration.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.fest.util.Strings;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -96,15 +97,35 @@ public class MparticleMessageProcessor extends MessageProcessor {
     }
 
     private void postMessage(Account account, String messageText) throws IOException {
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpPost request = new HttpPost(INDICATIVE_INPUT_URL + account.getStringSetting(SETTINGS_API_KEY, true, null));
-        request.setEntity(new StringEntity(messageText, ContentType.APPLICATION_JSON));
-        HttpResponse response = client.execute(request);
+        if(account == null) {
+            return;
+        }
 
-        if(response == null || response.getStatusLine().getStatusCode() != 200){
-            if(response != null){
-                log.debug("Status code of the request is {}", response.getStatusLine().getStatusCode());
+        String apiKey = account.getStringSetting(SETTINGS_API_KEY, true, null);
+
+        if(!Strings.isNullOrEmpty(apiKey)) {
+            return;
+        }
+
+        HttpPost request = new HttpPost(INDICATIVE_INPUT_URL + apiKey);
+        request.setEntity(new StringEntity(messageText, ContentType.APPLICATION_JSON));
+
+        CloseableHttpClient client = null;
+        CloseableHttpResponse response = null;
+
+        try {
+            client = HttpClients.createDefault();
+            response = client.execute(request);
+            if (response == null || response.getStatusLine().getStatusCode() != 200) {
+                if (response != null) {
+                    log.debug("Status code of the request is {}", response.getStatusLine().getStatusCode());
+                }
             }
+        } catch (Exception e){
+            log.debug("Exception caught ", e);
+        } finally {
+            if(response != null) response.close();
+            if(client != null) client.close();
         }
     }
 }
