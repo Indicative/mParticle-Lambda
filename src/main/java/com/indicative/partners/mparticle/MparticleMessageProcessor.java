@@ -2,7 +2,6 @@ package com.indicative.partners.mparticle;
 
 import com.google.common.collect.Lists;
 import com.mparticle.sdk.MessageProcessor;
-import com.mparticle.sdk.model.Message;
 import com.mparticle.sdk.model.MessageSerializer;
 import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeRequest;
 import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeResponse;
@@ -105,5 +104,16 @@ public class MparticleMessageProcessor extends MessageProcessor {
                 log.debug("Status code of the request is {}", response.getStatusLine().getStatusCode());
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        MessageSerializer serializer = new MessageSerializer();
+        MparticleMessageProcessor processor = new MparticleMessageProcessor();
+        ModuleRegistrationResponse response = processor.processRegistrationRequest(new ModuleRegistrationRequest());
+        System.out.println();
+        System.out.println("JSON TO SEND TO mPARTICLE");
+        System.out.println();
+        System.out.println(serializer.serialize(response));
+        System.out.println();
     }
 }

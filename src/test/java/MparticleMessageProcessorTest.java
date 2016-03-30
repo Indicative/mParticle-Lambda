@@ -5,11 +5,13 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.indicative.partners.mparticle.MparticleLambdaEndpoint;
 import com.indicative.partners.mparticle.MparticleMessageProcessor;
+import com.mparticle.sdk.model.MessageSerializer;
 import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeRequest;
 import com.mparticle.sdk.model.audienceprocessing.AudienceSubscriptionRequest;
 import com.mparticle.sdk.model.audienceprocessing.UserProfile;
 import com.mparticle.sdk.model.eventprocessing.EventProcessingRequest;
 import com.mparticle.sdk.model.registration.ModuleRegistrationRequest;
+import com.mparticle.sdk.model.registration.ModuleRegistrationResponse;
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import com.yammer.dropwizard.testing.JsonHelpers;
 import lombok.extern.slf4j.Slf4j;
@@ -120,5 +122,17 @@ public class MparticleMessageProcessorTest {
         AudienceMembershipChangeRequest request = new AudienceMembershipChangeRequest();
         mparticleMessageProcessor.processMessage(request);
         verifyNoMoreInteractions(mparticleMessageProcessor);
+    }
+
+    @Test
+    public void getModuleRegistrationJSON() throws Exception{
+        MessageSerializer serializer = new MessageSerializer();
+        MparticleMessageProcessor processor = new MparticleMessageProcessor();
+        ModuleRegistrationResponse response = processor.processRegistrationRequest(new ModuleRegistrationRequest());
+        System.out.println();
+        System.out.println("JSON:");
+        System.out.println();
+        System.out.println(serializer.serialize(response));
+        System.out.println();
     }
 }
