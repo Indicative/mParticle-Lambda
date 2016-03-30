@@ -4,7 +4,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.mparticle.sdk.model.Message;
 import com.mparticle.sdk.model.MessageSerializer;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -18,8 +17,11 @@ import java.io.OutputStream;
 public class MparticleLambdaEndpoint implements RequestStreamHandler {
     private final MessageSerializer serializer = new MessageSerializer();
 
-    @Setter
-    private MparticleMessageProcessor processor = new MparticleMessageProcessor();
+    private MparticleMessageProcessor processor;
+
+    public MparticleLambdaEndpoint(MparticleMessageProcessor processor){
+        this.processor = processor;
+    }
 
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
         Message request = serializer.deserialize(inputStream, Message.class);

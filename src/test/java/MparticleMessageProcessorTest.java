@@ -42,8 +42,7 @@ public class MparticleMessageProcessorTest {
     @Before
     public void setUp() throws Exception{
         mparticleMessageProcessor = Mockito.mock(MparticleMessageProcessor.class);
-        endpoint = new MparticleLambdaEndpoint();
-        endpoint.setProcessor(mparticleMessageProcessor);
+        endpoint = new MparticleLambdaEndpoint(mparticleMessageProcessor);
     }
 
     private String loadMparticleFixture(String name) throws IOException {
