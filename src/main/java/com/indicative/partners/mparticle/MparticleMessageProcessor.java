@@ -1,6 +1,7 @@
 package com.indicative.partners.mparticle;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Singleton;
 import com.mparticle.sdk.MessageProcessor;
 import com.mparticle.sdk.model.MessageSerializer;
 import com.mparticle.sdk.model.audienceprocessing.AudienceMembershipChangeRequest;
@@ -25,6 +26,7 @@ import java.util.List;
  * Created by prajjwol on 3/23/16.
  */
 @Slf4j
+@Singleton
 public class MparticleMessageProcessor extends MessageProcessor {
     private static final String NAME = "Indicative";
     private static final String VERSION = "1.0";
@@ -104,16 +106,5 @@ public class MparticleMessageProcessor extends MessageProcessor {
                 log.debug("Status code of the request is {}", response.getStatusLine().getStatusCode());
             }
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        MessageSerializer serializer = new MessageSerializer();
-        MparticleMessageProcessor processor = new MparticleMessageProcessor();
-        ModuleRegistrationResponse response = processor.processRegistrationRequest(new ModuleRegistrationRequest());
-        System.out.println();
-        System.out.println("JSON TO SEND TO mPARTICLE");
-        System.out.println();
-        System.out.println(serializer.serialize(response));
-        System.out.println();
     }
 }
