@@ -36,20 +36,14 @@ public class MparticleMessageProcessorTest {
     private final static String AUDIENCE_MEMBERSHIP = "AudienceMembershipChange";
     private final static String EVENT_PROCESSING = "EventProcessing";
     private final static String AUDIENCE_SUBSCRIPTION = "AudienceSubscription";
-    private Injector injector;
     private MparticleMessageProcessor mparticleMessageProcessor;
     private MparticleLambdaEndpoint endpoint;
 
     @Before
     public void setUp() throws Exception{
         mparticleMessageProcessor = Mockito.mock(MparticleMessageProcessor.class);
-        injector = Guice.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(MparticleMessageProcessor.class).toInstance(mparticleMessageProcessor);
-                }
-        });
-        endpoint = new MparticleLambdaEndpoint(mparticleMessageProcessor);
+        endpoint = new MparticleLambdaEndpoint();
+        endpoint.setProcessor(mparticleMessageProcessor);
     }
 
     private String loadMparticleFixture(String name) throws IOException {
