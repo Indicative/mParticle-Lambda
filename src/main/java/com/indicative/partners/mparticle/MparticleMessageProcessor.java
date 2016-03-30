@@ -55,7 +55,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
                 )
         );
         permissions.setAllowAccessIpAddress(true);
-        permissions.setAllowAccessIpAddress(true);
+        permissions.setAllowAccessLocation(true);
 
         List<Setting> eventSettings = Lists.newArrayList();
         eventSettings.add(apiKey);
