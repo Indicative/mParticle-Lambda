@@ -1,8 +1,5 @@
 import com.amazonaws.services.lambda.runtime.Context;
 import com.google.common.collect.Lists;
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.indicative.partners.mparticle.MparticleLambdaEndpoint;
 import com.indicative.partners.mparticle.MparticleMessageProcessor;
 import com.mparticle.sdk.model.MessageSerializer;
