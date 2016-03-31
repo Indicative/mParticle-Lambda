@@ -7,7 +7,8 @@
       "account_id":0,
       "account_settings":{  
          "endpointUrl":"",
-         "channelName":"@sdozor"
+         "channelName":"@sdozor",
+         "apiKey": "RandomAPIKEY"
       }
    },
    "user_attributes":{  

@@ -5,7 +5,8 @@
    "account":{  
       "account_id":123456,
       "account_settings":{  
-         "Sample Account Setting key":"sample account setting value"
+         "Sample Account Setting key":"sample account setting value",
+         "apiKey": "RandomAPIKEY"
       }
    },
    "audience_id":0,

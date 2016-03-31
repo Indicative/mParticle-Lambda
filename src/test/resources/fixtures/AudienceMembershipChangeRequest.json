@@ -4,11 +4,12 @@
    "timestamp_ms":1454693235751,
    "account":{
       "account_id":123456,
-      "account_settings":{
+     "account_settings":{
          "Example String Setting":"Example Setting Value",
          "Example Boolean Setting":"false",
-         "Example Integer Setting":"123"
-      }
+         "Example Integer Setting":"123",
+         "apiKey": "RandomAPIKEY"
+     }
    },
    "user_profiles":[
       {
