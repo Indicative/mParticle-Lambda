@@ -9,7 +9,6 @@ import com.mparticle.sdk.model.audienceprocessing.UserProfile;
 import com.mparticle.sdk.model.eventprocessing.EventProcessingRequest;
 import com.mparticle.sdk.model.registration.ModuleRegistrationRequest;
 import com.mparticle.sdk.model.registration.ModuleRegistrationResponse;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import com.yammer.dropwizard.testing.JsonHelpers;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -17,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -49,7 +49,7 @@ public class MparticleMessageProcessorTest {
     @Test
     public void testProcessEventProcessing() throws IOException{
         InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(EVENT_PROCESSING));
-        OutputStream outputStream = new ByteOutputStream();
+        OutputStream outputStream = new ByteArrayOutputStream();
         Context context = new TestContext();
         endpoint.handleRequest(inputStream, outputStream, context);
         verify(mparticleMessageProcessor, times(1)).processEventProcessingRequest(any(EventProcessingRequest.class));
@@ -58,7 +58,7 @@ public class MparticleMessageProcessorTest {
     @Test
     public void testProcessAudienceSubscription() throws IOException{
         InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(AUDIENCE_SUBSCRIPTION));
-        OutputStream outputStream = new ByteOutputStream();
+        OutputStream outputStream = new ByteArrayOutputStream();
         Context context = new TestContext();
         endpoint.handleRequest(inputStream, outputStream, context);
         verify(mparticleMessageProcessor, times(1)).processAudienceSubscriptionRequest(any(AudienceSubscriptionRequest.class));
@@ -66,7 +66,7 @@ public class MparticleMessageProcessorTest {
     @Test
     public void testProcessAudienceMembershipChange() throws IOException{
         InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(AUDIENCE_MEMBERSHIP));
-        OutputStream outputStream = new ByteOutputStream();
+        OutputStream outputStream = new ByteArrayOutputStream();
         Context context = new TestContext();
         endpoint.handleRequest(inputStream, outputStream, context);
         verify(mparticleMessageProcessor, times(1)).processAudienceMembershipChangeRequest(any(AudienceMembershipChangeRequest.class));
@@ -74,7 +74,7 @@ public class MparticleMessageProcessorTest {
     @Test
     public void testProcessModuleRegistration() throws IOException{
         InputStream inputStream = IOUtils.toInputStream(loadMparticleFixture(MODULE_REGISTRATION));
-        OutputStream outputStream = new ByteOutputStream();
+        OutputStream outputStream = new ByteArrayOutputStream();
         Context context = new TestContext();
         endpoint.handleRequest(inputStream, outputStream, context);
         verify(mparticleMessageProcessor, times(1)).processRegistrationRequest(any(ModuleRegistrationRequest.class));
