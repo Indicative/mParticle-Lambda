@@ -101,7 +101,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
 
         String apiKey = account.getStringSetting(SETTINGS_API_KEY, true, null);
 
-        if(!Strings.isNullOrEmpty(apiKey)) {
+        if(Strings.isNullOrEmpty(apiKey)) {
             return;
         }
 
