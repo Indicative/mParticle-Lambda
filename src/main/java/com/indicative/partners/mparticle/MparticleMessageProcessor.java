@@ -54,6 +54,14 @@ public class MparticleMessageProcessor extends MessageProcessor {
                         new UserIdentityPermission(UserIdentity.Type.CUSTOMER, Identity.Encoding.RAW, true)
                 )
         );
+
+        permissions.setDeviceIdentities(Arrays.asList(
+                new DeviceIdentityPermission(DeviceIdentity.Type.APPLE_PUSH_NOTIFICATION_TOKEN, Identity.Encoding.RAW),
+                new DeviceIdentityPermission(DeviceIdentity.Type.ANDROID_ID, Identity.Encoding.RAW),
+                new DeviceIdentityPermission(DeviceIdentity.Type.IOS_VENDOR_ID, Identity.Encoding.RAW),
+                new DeviceIdentityPermission(DeviceIdentity.Type.GOOGLE_CLOUD_MESSAGING_TOKEN, Identity.Encoding.RAW)
+        ));
+
         permissions.setAllowAccessIpAddress(true);
         permissions.setAllowAccessLocation(true);
 
