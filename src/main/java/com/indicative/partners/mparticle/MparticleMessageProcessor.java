@@ -33,6 +33,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
             "Indicative</a> Simple, Powerful Business Intelligence & Analytics for Marketing, Product, " +
             "and Business Teams\"";
     private static final String SETTINGS_API_KEY = "apiKey";
+    private static final String LIST_ID = "listId";
     private static final String INDICATIVE_INPUT_URL = "https://api.indicative.com/service/mparticle/";
 
     private final MessageSerializer serializer = new MessageSerializer();
@@ -64,6 +65,9 @@ public class MparticleMessageProcessor extends MessageProcessor {
 
         List<Setting> audienceSettings = Lists.newArrayList();
         audienceSettings.add(apiKey);
+        TextSetting listIdSetting = new TextSetting(LIST_ID, "List ID");
+        listIdSetting.setIsRequired(true);
+        audienceSettings.add(listIdSetting);
         AudienceProcessingRegistration audienceProcessingRegistration = new AudienceProcessingRegistration();
         audienceProcessingRegistration.setAccountSettings(audienceSettings);
 
