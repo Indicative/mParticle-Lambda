@@ -47,6 +47,9 @@ public class MparticleMessageProcessor extends MessageProcessor {
         Setting apiKey = new TextSetting(SETTINGS_API_KEY, "API Key")
                 .setIsRequired(true)
                 .setIsConfidential(true);
+        apiKey.setDescription("When you sign up with Indicative, you will receive API Keys which correspond to all " +
+                "supported platforms on mParticle");
+
 
         Permissions permissions = new Permissions();
         permissions.setUserIdentities(
@@ -60,8 +63,11 @@ public class MparticleMessageProcessor extends MessageProcessor {
                 new DeviceIdentityPermission(DeviceIdentity.Type.APPLE_PUSH_NOTIFICATION_TOKEN, Identity.Encoding.RAW),
                 new DeviceIdentityPermission(DeviceIdentity.Type.ANDROID_ID, Identity.Encoding.RAW),
                 new DeviceIdentityPermission(DeviceIdentity.Type.IOS_VENDOR_ID, Identity.Encoding.RAW),
-                new DeviceIdentityPermission(DeviceIdentity.Type.GOOGLE_CLOUD_MESSAGING_TOKEN, Identity.Encoding.RAW)
+                new DeviceIdentityPermission(DeviceIdentity.Type.GOOGLE_CLOUD_MESSAGING_TOKEN, Identity.Encoding.RAW),
+                new DeviceIdentityPermission(DeviceIdentity.Type.IOS_ADVERTISING_ID, Identity.Encoding.RAW),
+                new DeviceIdentityPermission(DeviceIdentity.Type.GOOGLE_ADVERTISING_ID, Identity.Encoding.RAW)
         ));
+
 
         permissions.setAllowAccessIpAddress(true);
         permissions.setAllowAccessLocation(true);
@@ -70,7 +76,13 @@ public class MparticleMessageProcessor extends MessageProcessor {
         eventSettings.add(apiKey);
         EventProcessingRegistration eventProcessingRegistration = new EventProcessingRegistration()
                 .setSupportedEventTypes(Lists.newArrayList(Event.Type.values()))
-                .setAccountSettings(eventSettings);
+                .setAccountSettings(eventSettings)
+                .setSupportedRuntimeEnvironments(Arrays.asList(
+                        RuntimeEnvironment.Type.ANDROID,
+                        RuntimeEnvironment.Type.IOS,
+                        RuntimeEnvironment.Type.TVOS,
+                        RuntimeEnvironment.Type.UNKNOWN
+                ));
 
         List<Setting> audienceSettings = Lists.newArrayList();
         audienceSettings.add(apiKey);
