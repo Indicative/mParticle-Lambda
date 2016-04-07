@@ -29,9 +29,10 @@ import java.util.List;
 public class MparticleMessageProcessor extends MessageProcessor {
     private static final String NAME = "Indicative";
     private static final String VERSION = "1.0";
-    private static final String DESCRIPTION = "<a href=\"https://www.indicative.com\" target=\"_blank\">" +
-            "Indicative</a> Simple, Powerful Business Intelligence & Analytics for Marketing, Product, " +
-            "and Business Teams\"";
+    private static final String DESCRIPTION = "Indicative is a behavioral analytics platform for growth marketers, " +
+        "product managers, and data analysts to optimize customer acquisition, conversion, and retention. When you sign " +
+        "up with Indicative, you will receive API keys which correspond to all supported platforms on mParticle. " +
+        "Register at: <a href=\"https://app.indicative.com/partners/#/mparticle\" target=\"_blank\"> Indicative </a>";
     private static final String SETTINGS_API_KEY = "apiKey";
     private static final String LIST_ID = "listId";
     private static final String INDICATIVE_INPUT_URL = "https://api.indicative.com/service/mparticle/";
