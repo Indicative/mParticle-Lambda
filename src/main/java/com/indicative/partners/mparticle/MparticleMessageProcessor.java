@@ -74,7 +74,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
 
         List<Setting> audienceSettings = Lists.newArrayList();
         audienceSettings.add(apiKey);
-        TextSetting listIdSetting = new TextSetting(LIST_ID, "List ID");
+        IntegerSetting listIdSetting = new IntegerSetting(LIST_ID, "List ID");
         listIdSetting.setIsRequired(true);
         audienceSettings.add(listIdSetting);
         AudienceProcessingRegistration audienceProcessingRegistration = new AudienceProcessingRegistration();
