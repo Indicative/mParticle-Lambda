@@ -29,16 +29,13 @@ import java.util.List;
 public class MparticleMessageProcessor extends MessageProcessor {
     private static final String NAME = "Indicative";
     private static final String VERSION = "1.0";
-    private static final String DESCRIPTION = "Indicative is a behavioral analytics platform for growth marketers, " +
-        "product managers, and data analysts to optimize customer acquisition, conversion, and retention. When you sign " +
-        "up with Indicative, you will receive API keys which correspond to all supported platforms on mParticle. " +
-        "Register at: <a href=\"https://app.indicative.com/partners/#/mparticle\" target=\"_blank\"> Indicative </a>";
+    private static final String DESCRIPTION = "<a href=\"https://app.indicative.com/partners/#/mparticle\" target=\"_blank\"> " +
+            "Indicative </a> is a behavioral analytics platform for growth marketers, " +
+        "product managers, and data analysts to optimize customer acquisition, conversion, and retention.";
     private static final String SETTINGS_API_KEY = "apiKey";
-    private static final String LIST_ID = "listId";
     private static final String INDICATIVE_INPUT_URL = "https://api.indicative.com/service/mparticle/";
 
     private final MessageSerializer serializer = new MessageSerializer();
-
 
     @Override
     public ModuleRegistrationResponse processRegistrationRequest(ModuleRegistrationRequest moduleRegistrationRequest) {
@@ -49,7 +46,6 @@ public class MparticleMessageProcessor extends MessageProcessor {
                 .setIsConfidential(true);
         apiKey.setDescription("When you sign up with Indicative, you will receive API Keys which correspond to all " +
                 "supported platforms on mParticle");
-
 
         Permissions permissions = new Permissions();
         permissions.setUserIdentities(
@@ -86,9 +82,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
 
         List<Setting> audienceSettings = Lists.newArrayList();
         audienceSettings.add(apiKey);
-        IntegerSetting listIdSetting = new IntegerSetting(LIST_ID, "List ID");
-        listIdSetting.setIsRequired(true);
-        audienceSettings.add(listIdSetting);
+
         AudienceProcessingRegistration audienceProcessingRegistration = new AudienceProcessingRegistration();
         audienceProcessingRegistration.setAccountSettings(audienceSettings);
 
