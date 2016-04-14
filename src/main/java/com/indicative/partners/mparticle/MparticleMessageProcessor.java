@@ -16,6 +16,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.protocol.HTTP;
 import org.fest.util.Strings;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
             "Indicative </a> is a behavioral analytics platform for growth marketers, " +
         "product managers, and data analysts to optimize customer acquisition, conversion, and retention.";
     private static final String SETTINGS_API_KEY = "apiKey";
-    private static final String INDICATIVE_INPUT_URL = "https://api.indicative.com/service/mparticle/";
+    private static final String INDICATIVE_INPUT_URL = "http://api.staging.indicative.com/service/mparticle/";
 
     private final MessageSerializer serializer = new MessageSerializer();
 
@@ -126,7 +127,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
 
         HttpPost request = new HttpPost(INDICATIVE_INPUT_URL + apiKey);
         request.setEntity(new StringEntity(messageText, ContentType.APPLICATION_JSON));
-
+        request.setHeader(HTTP.CONTENT_TYPE, "application/json");
         CloseableHttpClient client = null;
         CloseableHttpResponse response = null;
 
