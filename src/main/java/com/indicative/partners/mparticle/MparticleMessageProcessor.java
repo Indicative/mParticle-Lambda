@@ -34,7 +34,7 @@ public class MparticleMessageProcessor extends MessageProcessor {
             "Indicative </a> is a behavioral analytics platform for growth marketers, " +
         "product managers, and data analysts to optimize customer acquisition, conversion, and retention.";
     private static final String SETTINGS_API_KEY = "apiKey";
-    private static final String INDICATIVE_INPUT_URL = "http://api.staging.indicative.com/service/mparticle/";
+    private static final String INDICATIVE_INPUT_URL = "https://api.indicative.com/service/mparticle/";
 
     private final MessageSerializer serializer = new MessageSerializer();
 
